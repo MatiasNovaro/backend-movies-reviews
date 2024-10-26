@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import { getUser , createUser } from "../data/users.js";
+import { loginLimiter } from '../middlewares/rateLimit.js';
 
 const router = express.Router();
 
@@ -43,7 +44,7 @@ router.post('/register', async (req, res) => {
 // @route   POST /api/auth/login
 // @desc    Iniciar sesión
 // @access  Público
-router.post('/login', async (req, res) => {
+router.post('/login', loginLimiter, async (req, res) => {
     
     try {
         const { name, password } = req.body;

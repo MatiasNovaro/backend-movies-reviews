@@ -1,4 +1,5 @@
 import express from "express";
+import { reviewLimiter } from "../middlewares/rateLimit.js";
 import {
   getAllReviews,
   getReviewsByMovieId,
@@ -58,7 +59,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", auth , async (req, res) => {
+router.post("/", reviewLimiter, auth , async (req, res) => {
   try {
     const { movie_id, reviewText } = req.body;
     if(!reviewText || !movie_id) return res.status(400).json({ message: 'El texto de la reseña es requerido' });

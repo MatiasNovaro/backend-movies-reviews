@@ -12,7 +12,7 @@ GET http://localhost:1234/api/peliculas/573a1393f29313caabcdbe7c
 GET http://localhost:1234/api/reviews?pageSize=10&page=0
 
 ### 
-GET http://localhost:1234/api/reviews/573a1392f29313caabcda755
+GET http://localhost:1234/api/reviews/573a1390f29313caabcd5ea4
 
 ###
 GET http://localhost:1234/api/reviews/user/UsuarioPrueba1
