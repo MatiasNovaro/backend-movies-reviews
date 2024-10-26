@@ -1,0 +1,54 @@
+GET http://localhost:1234/api/peliculas?pageSize=10&page=10
+
+###
+GET http://localhost:1234/api/peliculas/filter?genres=Action&title=China&pageSize=10&page=0
+###
+GET http://localhost:1234/api/peliculas/filter?title=China&pageSize=10&page=1
+
+###
+GET http://localhost:1234/api/peliculas/573a1393f29313caabcdbe7c
+
+###
+GET http://localhost:1234/api/reviews?pageSize=10&page=0
+
+### 
+GET http://localhost:1234/api/reviews/573a1392f29313caabcda755
+
+###
+GET http://localhost:1234/api/reviews/user/UsuarioPrueba1
+
+###
+GET http://localhost:1234/api/reviews/573a1395f29313caabce1302
+
+
+###
+POST http://localhost:1234/api/reviews
+Content-Type: application/json
+
+{
+    "name" : "Gregor Clegane",
+    "email" : "hafthór_júlíus_björnsson@gameofthron.es",
+    "movie_id":"573a1392f29313caabcda755",
+    "text" : "Alta peli, no la vi.",
+    "date": "2015-02-08T01:28:23.000Z"
+}
+
+###
+GET http://localhost:1234/api/peliculas/count?title=peter
+
+###
+GET http://localhost:1234/api/reviews/count/573a1393f29313caabcdbe7c
+
+### 
+GET http://localhost:1234/api/reviews/count/573a139af29313caabcf0d74
+
+###
+POST http://localhost:1234/api/reviews
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNzI5NTUyMzc2LCJleHAiOjE3Mjk1NTU5NzZ9.Bo7mH2d0cxRcTTsK6ol4mHVKVPdmCklcvXv8R6yR4nU",
+    "movie_id":"573a1392f29313caabcda755",
+    "text" : "Alta peli, no la vi.",
+    "date": "2015-02-08T01:28:23.000Z"
+}
