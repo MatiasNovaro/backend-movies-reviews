@@ -1,28 +1,39 @@
 import jwt from 'jsonwebtoken';
 
+/**
+ * Middleware to authenticate users based on JWT provided in the Authorization header.
+ * 
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * @param {Function} next - The next middleware function in the stack.
+ */
 export default function auth (req, res, next) {
- // Verifica si el token existe en la cabecera 'Authorization'
+
+ // Check if the 'Authorization' header is present in the request
  const authHeader = req.headers['authorization'];
-  
+
+ // If no authorization header is found, respond with 401 Unauthorized
  if (!authHeader) {
-   return res.status(401).json({ message: 'Access Denied.' });
+  return next({ status: 401, message: 'Access Denied.' });
  }
 
- // El token suele ser enviado en la forma "Bearer <token>", así que eliminamos la palabra "Bearer"
+ // Extract the token from the header. The expected format is "Bearer <token>"
  const token = authHeader.split(' ')[1];
 
+ // If no token is found, respond with 401 Unauthorized
  if (!token) {
-   return res.status(401).json({ message: 'Access Denied.' });
+  return next({ status: 401, message: 'Access Denied.' });
  }
 
- // Verificar el token
+ // Verify the token using the secret from environment variables
  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
    if (err) {
-     return res.status(403).json({ message: 'Access Denied.' });
+    // If the token is invalid or expired, respond with 403 Forbidden
+    return next({ status: 403, message: 'Access Denied.' });
    }
    
-   // Guardar el usuario en la request para usarlo en la ruta
+   // Store the authenticated user information in the request object for downstream use
    req.user = user;
-   next();
+   next();  // Proceed to the next middleware or route handler
  });
 };
