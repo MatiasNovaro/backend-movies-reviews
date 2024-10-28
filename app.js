@@ -37,6 +37,6 @@ app.use("/api/users", usersRouter);
 app.use(errorHandler);
 
 //Iniciar servidor
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
   console.log("Servidor Web en el puerto:", PORT);
 });
