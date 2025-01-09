@@ -11,10 +11,10 @@ const PORT = process.env.PORT;
 const app = express();
 //-----Third-party-----
 
-//Seguridad
+//Security
 app.use(helmet());
 
-//Permitir conexion con nextjs
+//Allow connection with nextjjs
 app.use(cors({
   origin: process.env.CLIENT_ORIGIN,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -25,7 +25,7 @@ app.use(morgan('combined'));
 
 //-----Built-in------
 
-//Parseador
+//Parser
 app.use(express.json());
 
 //Routes
@@ -33,10 +33,10 @@ app.use("/api/peliculas", peliculasRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/users", usersRouter);
 
-//Este middleware es el encargado de gestionar todos los errores.
+//Error handler
 app.use(errorHandler);
 
-//Iniciar servidor
+//Start server
 app.listen(PORT,'0.0.0.0', () => {
   console.log("Servidor Web en el puerto:", PORT);
 });
